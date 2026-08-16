@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.util.List;
 
-// Pas de préfixe "/api" : nginx (côté front) le retire déjà avant de
-// transmettre au backend (location /api/ { proxy_pass http://backend:8081/; }).
 @RestController
 @RequestMapping("/users")
 public class UserController {

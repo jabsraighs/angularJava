@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="user-form">
+  <h2>{{ userId ? 'Modifier' : 'Nouvel' }} utilisateur</h2>
+
+  <label for="nom">Nom</label>
+  <input id="nom" type="text" formControlName="nom" />
+  @if (form.get('nom')?.invalid && form.get('nom')?.touched) {
+    <p class="error">Le nom est obligatoire.</p>
+  }
+
+  <label for="prenom">Prénom</label>
+  <input id="prenom" type="text" formControlName="prenom" />
+  @if (form.get('prenom')?.invalid && form.get('prenom')?.touched) {
+    <p class="error">Le prénom est obligatoire.</p>
+  }
+
+  <label for="email">Email</label>
+  <input id="email" type="email" formControlName="email" />
+  @if (form.get('email')?.invalid && form.get('email')?.touched) {
+    <p class="error">Email invalide.</p>
+  }
+
+  <label for="motDePasse">Mot de passe</label>
+  <input id="motDePasse" type="password" formControlName="motDePasse" />
+  @if (form.get('motDePasse')?.invalid && form.get('motDePasse')?.touched) {
+    <p class="error">8 caractères minimum.</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <button type="submit" [disabled]="isSubmitting">Enregistrer</button>
+</form>

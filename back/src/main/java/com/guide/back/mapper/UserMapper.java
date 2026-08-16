@@ -18,12 +18,6 @@ public class UserMapper {
     public User toEntity(UserRequestDTO dto) {
         return new User(dto.nom(), dto.prenom(), dto.email(), passwordEncoder.encode(dto.motDePasse()));
     }
-
-    /**
-     * Met à jour une entité déjà chargée (managée par JPA) plutôt que
-     * d'en créer une nouvelle : le dirty checking de Hibernate génère
-     * l'UPDATE tout seul, sans save() explicite (voir UserServiceImpl).
-     */
     public void updateEntity(User user, UserRequestDTO dto) {
         user.setNom(dto.nom());
         user.setPrenom(dto.prenom());

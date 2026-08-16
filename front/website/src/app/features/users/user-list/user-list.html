@@ -1,0 +1,44 @@
+<section class="user-list">
+  <header class="user-list__header">
+    <h1>Utilisateurs</h1>
+    <a routerLink="/users/nouveau" class="btn btn--primary">+ Nouvel utilisateur</a>
+  </header>
+
+  @if (isLoading) {
+    <p class="state state--loading">Chargement…</p>
+  }
+
+  @if (errorMessage) {
+    <p class="state state--error">{{ errorMessage }}</p>
+  }
+
+  @if (!isLoading && !errorMessage && users.length === 0) {
+    <p class="state state--empty">Aucun utilisateur pour le moment.</p>
+  }
+
+  @if (users.length > 0) {
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th class="user-table__actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.id) {
+          <tr>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.email }}</td>
+            <td class="user-table__actions">
+              <a [routerLink]="['/users', user.id, 'modifier']" class="btn btn--ghost">Modifier</a>
+              <button type="button" class="btn btn--danger" (click)="deleteUser(user.id)">Supprimer</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>

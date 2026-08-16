@@ -36,7 +36,6 @@ public class User {
     private LocalDateTime createdAt;
 
     protected User() {
-        // Constructeur vide requis par JPA/Hibernate
     }
     public User(String nom, String prenom, String email, String motDePasseHache) {
         this.nom = nom;

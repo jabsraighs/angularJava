@@ -7,7 +7,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:website": "node dist/website/server/server.mjs"
+    "serve:ssr:website": "node dist/website/server/server.mjs",
+    "ng:docker": "docker compose -f ../../docker-compose.yml --profile tools run --rm ng",
+    "generate:model": "npm run ng:docker -- generate interface core/models/user",
+    "generate:service": "npm run ng:docker -- generate service core/services/user",
+    "generate:list": "npm run ng:docker -- generate component features/users/user-list --standalone",
+    "generate:form": "npm run ng:docker -- generate component features/users/user-form --standalone",
+    "generate:users": "npm run generate:model && npm run generate:service && npm run generate:list && npm run generate:form"
   },
   "private": true,
   "packageManager": "npm@11.6.2",
