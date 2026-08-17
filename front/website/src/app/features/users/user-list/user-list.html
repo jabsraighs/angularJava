@@ -4,19 +4,19 @@
     <a routerLink="/users/nouveau" class="btn btn--primary">+ Nouvel utilisateur</a>
   </header>
 
-  @if (isLoading) {
+  @if (isLoading()) {
     <p class="state state--loading">Chargement…</p>
   }
 
-  @if (errorMessage) {
-    <p class="state state--error">{{ errorMessage }}</p>
+  @if (errorMessage()) {
+    <p class="state state--error">{{ errorMessage() }}</p>
   }
 
-  @if (!isLoading && !errorMessage && users.length === 0) {
+  @if (!isLoading() && !errorMessage() && users().length === 0) {
     <p class="state state--empty">Aucun utilisateur pour le moment.</p>
   }
 
-  @if (users.length > 0) {
+  @if (users().length > 0) {
     <table class="user-table">
       <thead>
         <tr>
@@ -27,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (user of users; track user.id) {
+        @for (user of users(); track user.id) {
           <tr>
             <td>{{ user.nom }}</td>
             <td>{{ user.prenom }}</td>
