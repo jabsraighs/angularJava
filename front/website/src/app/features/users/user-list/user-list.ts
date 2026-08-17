@@ -23,21 +23,24 @@ export class UserList implements OnInit {
   }
 
   loadUsers(): void {
-    this.isLoading = true;
-    this.errorMessage = null;
+  console.log('loadUsers appelé');
+  this.isLoading = true;
+  this.errorMessage = null;
 
-    this.userService.getAll().subscribe({
-      next: (users) => {
-        this.users = users;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = 'Impossible de charger les utilisateurs.';
-        this.isLoading = false;
-      },
-    });
-  }
-
+  this.userService.getAll().subscribe({
+    next: (users) => {
+      console.log('Données reçues:', users);
+      this.users = users;
+      this.isLoading = false;
+      console.log('isLoading après:', this.isLoading);
+    },
+    error: (err) => {
+      console.log('Erreur reçue:', err);
+      this.errorMessage = 'Impossible de charger les utilisateurs.';
+      this.isLoading = false;
+    },
+  });
+}
   deleteUser(id: number): void {
     if (!confirm('Supprimer cet utilisateur ?')) {
       return;
