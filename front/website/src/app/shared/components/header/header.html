@@ -1,0 +1,29 @@
+<header class="border-b border-ink-200 bg-white sticky top-0 z-10">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a routerLink="/" class="flex items-center gap-2">
+      <span class="w-7 h-7 rounded-md bg-brand-600 flex items-center justify-center">
+        <span class="text-white text-sm font-bold">F</span>
+      </span>
+      <span class="font-display font-semibold text-ink-900 tracking-tight text-lg">FactuPro</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-1">
+      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="bg-ink-100 text-ink-900" class="px-3 py-1.5 rounded-md text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors">
+        Accueil
+      </a>
+      <a routerLink="/factures" routerLinkActive="bg-ink-100 text-ink-900" class="px-3 py-1.5 rounded-md text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors">
+        Factures
+      </a>
+      <a routerLink="/devis" routerLinkActive="bg-ink-100 text-ink-900" class="px-3 py-1.5 rounded-md text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors">
+        Devis
+      </a>
+      <a routerLink="/users" routerLinkActive="bg-ink-100 text-ink-900" class="px-3 py-1.5 rounded-md text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors">
+        Utilisateurs
+      </a>
+    </nav>
+
+    <app-button variant="primary" routerLink="/devis/nouveau">
+      + Nouveau devis
+    </app-button>
+  </div>
+</header>

@@ -1,0 +1,30 @@
+<section class="max-w-6xl mx-auto px-6 py-10">
+  <h1 class="font-display text-2xl font-semibold text-ink-900 tracking-tight mb-8">Factures</h1>
+
+  @if (!isLoading() && factures().length > 0) {
+    <div class="border border-ink-200 rounded-xl overflow-hidden bg-white">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-ink-50 border-b border-ink-200 text-left text-ink-600">
+            <th class="px-5 py-3 font-medium">N°</th>
+            <th class="px-5 py-3 font-medium">Client</th>
+            <th class="px-5 py-3 font-medium">Montant TTC</th>
+            <th class="px-5 py-3 font-medium">Échéance</th>
+            <th class="px-5 py-3 font-medium">Statut</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-ink-200">
+          @for (f of factures(); track f.id) {
+            <tr class="hover:bg-ink-50 transition-colors">
+              <td class="px-5 py-3 font-medium text-ink-900">{{ f.numero }}</td>
+              <td class="px-5 py-3 text-ink-600">{{ f.clientNom }}</td>
+              <td class="px-5 py-3 text-ink-900">{{ f.montantTTC | number:'1.2-2' }} €</td>
+              <td class="px-5 py-3 text-ink-600">{{ f.dateEcheance | date:'dd/MM/yyyy' }}</td>
+              <td class="px-5 py-3"><app-badge [tone]="badgeTone(f.statut)">{{ f.statut }}</app-badge></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

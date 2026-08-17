@@ -1,0 +1,15 @@
+
+<button
+  [type]="type()"
+  [disabled]="disabled()"
+  (click)="clicked.emit()"
+  class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+  [class]="{
+    'bg-brand-600 hover:bg-brand-700 text-white': variant() === 'primary',
+    'bg-white border border-ink-200 text-ink-900 hover:bg-ink-50': variant() === 'secondary',
+    'text-red-600 hover:bg-red-50': variant() === 'danger',
+    'text-ink-600 hover:text-ink-900': variant() === 'ghost'
+  }"
+>
+  <ng-content />
+</button>

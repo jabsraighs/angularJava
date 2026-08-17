@@ -1,44 +1,69 @@
-<section class="user-list">
-  <header class="user-list__header">
-    <h1>Utilisateurs</h1>
-    <a routerLink="/users/nouveau" class="btn btn--primary">+ Nouvel utilisateur</a>
+<section class="max-w-5xl mx-auto px-6 py-10">
+  <header class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="font-display text-2xl font-semibold text-ink-900 tracking-tight">Utilisateurs</h1>
+      <p class="text-sm text-ink-600 mt-1">Gérez les comptes de la plateforme.</p>
+    </div>
+    <a routerLink="/users/nouveau" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+      + Nouvel utilisateur
+    </a>
   </header>
 
   @if (isLoading()) {
-    <p class="state state--loading">Chargement…</p>
+    <div class="flex items-center gap-3 text-ink-600 text-sm py-16 justify-center">
+      <svg class="animate-spin h-4 w-4 text-brand-600" viewBox="0 0 24 24" fill="none">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+      </svg>
+      Chargement…
+    </div>
   }
 
   @if (errorMessage()) {
-    <p class="state state--error">{{ errorMessage() }}</p>
+    <div class="flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">
+      <span>⚠</span>
+      <span>{{ errorMessage() }}</span>
+    </div>
   }
 
   @if (!isLoading() && !errorMessage() && users().length === 0) {
-    <p class="state state--empty">Aucun utilisateur pour le moment.</p>
+    <div class="text-center py-16 border border-dashed border-ink-200 rounded-xl">
+      <p class="text-ink-900 font-medium">Aucun utilisateur pour le moment.</p>
+      <p class="text-sm text-ink-600 mt-1">Crée le premier compte pour commencer.</p>
+    </div>
   }
 
   @if (users().length > 0) {
-    <table class="user-table">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <th class="user-table__actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (user of users(); track user.id) {
-          <tr>
-            <td>{{ user.nom }}</td>
-            <td>{{ user.prenom }}</td>
-            <td>{{ user.email }}</td>
-            <td class="user-table__actions">
-              <a [routerLink]="['/users', user.id, 'modifier']" class="btn btn--ghost">Modifier</a>
-              <button type="button" class="btn btn--danger" (click)="deleteUser(user.id)">Supprimer</button>
-            </td>
+    <div class="border border-ink-200 rounded-xl overflow-hidden bg-white">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-ink-50 border-b border-ink-200 text-left text-ink-600">
+            <th class="px-5 py-3 font-medium">Nom</th>
+            <th class="px-5 py-3 font-medium">Prénom</th>
+            <th class="px-5 py-3 font-medium">Email</th>
+            <th class="px-5 py-3 font-medium text-right">Actions</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody class="divide-y divide-ink-200">
+          @for (user of users(); track user.id) {
+            <tr class="hover:bg-ink-50 transition-colors">
+              <td class="px-5 py-3 text-ink-900 font-medium">{{ user.nom }}</td>
+              <td class="px-5 py-3 text-ink-600">{{ user.prenom }}</td>
+              <td class="px-5 py-3 text-ink-600">{{ user.email }}</td>
+              <td class="px-5 py-3">
+                <div class="flex justify-end gap-2">
+                  <a [routerLink]="['/users', user.id, 'modifier']" class="text-brand-600 hover:text-brand-700 text-sm font-medium">
+                    Modifier
+                  </a>
+                  <button type="button" (click)="deleteUser(user.id)" class="text-ink-400 hover:text-red-600 text-sm font-medium">
+                    Supprimer
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   }
 </section>
