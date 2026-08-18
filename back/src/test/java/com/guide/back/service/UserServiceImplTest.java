@@ -142,7 +142,6 @@ class UserServiceImplTest {
 
             assertThat(result).isEqualTo(responseDTO);
             verify(mapper, times(1)).updateEntity(user, requestDTO);
-            // Pas de save() explicite : on compte sur le dirty checking JPA
             verify(repository, never()).save(any());
         }
 

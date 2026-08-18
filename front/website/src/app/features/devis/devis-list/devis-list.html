@@ -1,1 +1,55 @@
-<p>devis-list works!</p>
+<section class="max-w-6xl mx-auto px-6 py-10">
+ 
+  @if (isLoading()) {
+    <p class="text-ink-600 text-sm py-16 text-center">Chargement…</p>
+  }
+
+  @if (!isLoading() && devisItems().length === 0) {
+    <div class="text-center py-16 border border-dashed border-ink-200 rounded-xl">
+      <p class="text-ink-900 font-medium">Aucun devis pour le moment.</p>
+    </div>
+  }
+
+  @if (devisItems().length > 0) {
+    <div class="border border-ink-200 rounded-xl overflow-hidden bg-white">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-ink-50 border-b border-ink-200 text-left text-ink-600">
+            <th class="px-5 py-3 font-medium">N°</th>
+            <th class="px-5 py-3 font-medium">Client</th>
+            <th class="px-5 py-3 font-medium">Montant HT</th>
+            <th class="px-5 py-3 font-medium">Validité</th>
+            <th class="px-5 py-3 font-medium">Statut</th>
+            <th class="px-5 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-ink-200">
+          @for (d of devisItems(); track d.id) {
+            <tr class="hover:bg-ink-50 transition-colors">
+              <td class="px-5 py-3 font-medium text-ink-900">{{ d.numero }}</td>
+              <td class="px-5 py-3 text-ink-600">{{ d.clientNom }}</td>
+              <td class="px-5 py-3 text-ink-900">{{ d.montantHT | number:'1.2-2' }} €</td>
+              <td class="px-5 py-3 text-ink-600">{{ d.dateValidite | date:'dd/MM/yyyy' }}</td>
+              <td class="px-5 py-3"><app-badge [tone]="badgeTone(d.statut)">{{ d.statut }}</app-badge></td>
+              <td class="px-5 py-3">
+                <div class="flex justify-end gap-3">
+                  @if (d.statut === 'ACCEPTE') {
+                    <a [routerLink]="['/factures/nouveau', d.id]" class="text-brand-600 hover:text-brand-700 text-sm font-medium">
+                      Convertir en facture
+                    </a>
+                  }
+                  <a [routerLink]="['/devis', d.id, 'modifier']" class="text-ink-600 hover:text-ink-900 text-sm font-medium">
+                    Modifier
+                  </a>
+                  <button type="button" (click)="deleteDevis(d.id)" class="text-ink-400 hover:text-red-600 text-sm font-medium">
+                    Supprimer
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

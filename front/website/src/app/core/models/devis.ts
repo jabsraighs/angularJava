@@ -9,3 +9,10 @@ export interface Devis {
   dateCreation: string;
   dateValidite: string;
 }
+
+export interface DevisRequest {
+  clientNom: string;
+  montantHT: number;
+  statut: StatutDevis;
+  dateValidite: string;
+}

@@ -1,4 +1,3 @@
-// shared/components/footer/footer.ts
 import { Component } from '@angular/core';
 
 @Component({

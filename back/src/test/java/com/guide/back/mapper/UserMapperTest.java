@@ -23,7 +23,7 @@ class UserMapperTest {
         User user = mapper.toEntity(dto);
 
         assertThat(user.getMotDePasse()).isNotEqualTo("motdepasse123");
-        assertThat(user.getMotDePasse()).startsWith("$2a$"); // préfixe standard BCrypt
+        assertThat(user.getMotDePasse()).startsWith("$2a$");
     }
 
     @Test
@@ -43,9 +43,6 @@ class UserMapperTest {
         user.setId(1L);
 
         UserResponseDTO dto = mapper.toDto(user);
-
-        // UserResponseDTO n'a même pas de champ motDePasse : la garantie
-        // est structurelle, pas seulement testée au runtime.
         assertThat(dto.id()).isEqualTo(1L);
         assertThat(dto.email()).isEqualTo("marie@mail.com");
     }
