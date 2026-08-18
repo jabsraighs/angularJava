@@ -1,5 +1,13 @@
 <section class="max-w-6xl mx-auto px-6 py-10">
+    <section class="max-w-6xl mx-auto px-6 py-10">
+  <header class="flex items-center justify-between mb-8">
+    <h1 class="font-display text-2xl font-semibold text-ink-900 tracking-tight">Devis</h1>
+    <a routerLink="/devis/nouveau" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+      + Nouveau devis
+    </a>
+  </header>
  
+
   @if (isLoading()) {
     <p class="text-ink-600 text-sm py-16 text-center">Chargement…</p>
   }

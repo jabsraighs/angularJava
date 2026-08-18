@@ -1,33 +1,82 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="user-form">
-  <h2>{{ userId ? 'Modifier' : 'Nouvel' }} utilisateur</h2>
+<section class="max-w-xl mx-auto px-6 py-10">
+  <h1 class="font-display text-2xl font-semibold text-ink-900 tracking-tight mb-8">
+    {{ userId ? 'Modifier l\'utilisateur' : 'Nouvel utilisateur' }}
+  </h1>
 
-  <label for="nom">Nom</label>
-  <input id="nom" type="text" formControlName="nom" />
-  @if (form.get('nom')?.invalid && form.get('nom')?.touched) {
-    <p class="error">Le nom est obligatoire.</p>
-  }
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white border border-ink-200 rounded-xl p-6 space-y-4">
+    <label class="block">
+      <span class="block text-sm font-medium text-ink-900 mb-1.5">Nom</span>
+      <input
+        id="nom"
+        type="text"
+        formControlName="nom"
+        class="w-full border rounded-lg px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+        [class]="form.get('nom')?.invalid && form.get('nom')?.touched ? 'border-red-300' : 'border-ink-200'"
+      />
+      @if (form.get('nom')?.invalid && form.get('nom')?.touched) {
+        <span class="block text-xs text-red-600 mt-1">Le nom est obligatoire.</span>
+      }
+    </label>
 
-  <label for="prenom">Prénom</label>
-  <input id="prenom" type="text" formControlName="prenom" />
-  @if (form.get('prenom')?.invalid && form.get('prenom')?.touched) {
-    <p class="error">Le prénom est obligatoire.</p>
-  }
+    <label class="block">
+      <span class="block text-sm font-medium text-ink-900 mb-1.5">Prénom</span>
+      <input
+        id="prenom"
+        type="text"
+        formControlName="prenom"
+        class="w-full border rounded-lg px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+        [class]="form.get('prenom')?.invalid && form.get('prenom')?.touched ? 'border-red-300' : 'border-ink-200'"
+      />
+      @if (form.get('prenom')?.invalid && form.get('prenom')?.touched) {
+        <span class="block text-xs text-red-600 mt-1">Le prénom est obligatoire.</span>
+      }
+    </label>
 
-  <label for="email">Email</label>
-  <input id="email" type="email" formControlName="email" />
-  @if (form.get('email')?.invalid && form.get('email')?.touched) {
-    <p class="error">Email invalide.</p>
-  }
+    <label class="block">
+      <span class="block text-sm font-medium text-ink-900 mb-1.5">Email</span>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="vous@exemple.com"
+        class="w-full border rounded-lg px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+        [class]="form.get('email')?.invalid && form.get('email')?.touched ? 'border-red-300' : 'border-ink-200'"
+      />
+      @if (form.get('email')?.invalid && form.get('email')?.touched) {
+        <span class="block text-xs text-red-600 mt-1">Email invalide.</span>
+      }
+    </label>
 
-  <label for="motDePasse">Mot de passe</label>
-  <input id="motDePasse" type="password" formControlName="motDePasse" />
-  @if (form.get('motDePasse')?.invalid && form.get('motDePasse')?.touched) {
-    <p class="error">8 caractères minimum.</p>
-  }
+    <label class="block">
+      <span class="block text-sm font-medium text-ink-900 mb-1.5">Mot de passe</span>
+      <input
+        id="motDePasse"
+        type="password"
+        formControlName="motDePasse"
+        placeholder="••••••••"
+        class="w-full border rounded-lg px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+        [class]="form.get('motDePasse')?.invalid && form.get('motDePasse')?.touched ? 'border-red-300' : 'border-ink-200'"
+      />
+      @if (form.get('motDePasse')?.invalid && form.get('motDePasse')?.touched) {
+        <span class="block text-xs text-red-600 mt-1">8 caractères minimum.</span>
+      }
+    </label>
 
-  @if (errorMessage) {
-    <p class="error">{{ errorMessage }}</p>
-  }
+    @if (errorMessage) {
+      <p class="text-sm text-red-600">{{ errorMessage }}</p>
+    }
 
-  <button type="submit" [disabled]="isSubmitting">Enregistrer</button>
-</form>
+    <div class="flex items-center gap-3 pt-2">
+      <button
+        type="submit"
+        [disabled]="isSubmitting"
+        class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {{ isSubmitting ? 'Enregistrement…' : 'Enregistrer' }}
+      </button>
+      <a routerLink="/users" class="text-sm font-medium text-ink-600 hover:text-ink-900">
+        Annuler
+      </a>
+    </div>
+  </form>
+</section>
